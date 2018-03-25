@@ -1,0 +1,13 @@
+<h2><%= @house.address %></h2>
+<h2><%= @house.city %></h2>
+<h2><%= @house.postal_code %></h2>
+<h2><%= @house.price %></h2>
+<h2><%= @house.size %></h2>
+
+
+<% if user_signed_in? %>
+  <% if @house.user_id == current_user.id %>
+    <%= link_to "Edit House", edit_house_path(@house) %>
+    <%= link_to "Delete House", house_path, method: :delete, data: {comfirm: "Are you sure?"} %>
+  <% end %>
+<% end %>

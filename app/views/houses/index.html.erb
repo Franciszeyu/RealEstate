@@ -1,0 +1,10 @@
+
+<%= stylesheet_link_tag 'index' %>
+
+<% if @houses.count == 0 %>
+   <h3>There are currently no property in this category</h3>
+<% else %>
+  <% @houses.each do |house| %>
+   <h2><%= link_to house.address, house_path(house) %></h2>
+  <% end %>
+<% end %>

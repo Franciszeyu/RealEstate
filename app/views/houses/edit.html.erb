@@ -1,0 +1,15 @@
+<h2>Edit Book</h2>
+
+<%= simple_form_for @house, :html => { :multipart => true } do |f| %>
+  <%= f.select :category_id, @categories %>
+  <%= f.input :address %>
+  <%= f.input :size, label: "Total House Size " %>
+  <%= f.input :room, label: "Number of Rooms" %>
+  <%= f.input :bathroom, label: "Number of Bathrooms" %>
+  <%= f.input :city %>
+  <%= f.input :postal_code, label:"Postal Code" %>
+  <%= f.input :basement %>
+  <%= f.input :price %>
+  <%= f.input :description %>
+  <%= f.button :submit %>
+<% end %>

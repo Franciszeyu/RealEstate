@@ -1,0 +1,2 @@
+class AddDescriptionToHouse < ApplicationRecord
+end

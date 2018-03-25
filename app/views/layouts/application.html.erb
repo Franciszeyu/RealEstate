@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RealEstate</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <style>
+    input[type=text] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+    }
+  </style>
+
+  <body>
+
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <%= link_to image_tag("house.png"), root_path, class: "navbar-brand" %>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+        <ul class="nav navbar-nav navbar-right">
+
+          <li>
+            <form class="form-inline" action="" >
+              <input type="text" class="form-control" id="search-field" placeholder="Search here" name="search-field" align="left">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </li>
+
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false">Property Type<span class="caret" style="color: #FFFFFF;"></span></a>
+            <ul class="dropdown-menu">
+              <li>
+                <% Category.all.each do |category|%>
+
+                  <!-- Passing the category user selection to the url parameter so that House controller can get access
+                   to what user select by calling params[category: ] -->
+                  <%= link_to category.name, houses_path(category: category.name), class: "link" %>
+                <% end %>
+              </li>
+            </ul>
+          </li>
+
+          <% if user_signed_in? %>
+
+              <li class="dropdown">
+                <div class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                   aria-expanded="false" style="margin-top: 12px"><%= link_to image_tag("user.png") %>
+                  <span class="caret" style="color: #FFFFFF"></span></div>
+                <ul class="dropdown-menu">
+                  <li><%= link_to "Add House", new_house_path %></li>
+                  <li><%= link_to "Sign out", destroy_user_session_path, method: :delete  %></li>
+                </ul>
+              </li>
+            </ul>
+
+          <% else %>
+            <li><%= link_to "Sign up", new_user_registration_path %></li>
+            <li><%= link_to "Sign in",new_user_session_path %></li>
+          <% end  %>
+        </ul>
+      </div>
+
+    </div>
+  </nav>
+
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+
+  <%= yield %>
+  </body>
+</html>
